@@ -242,27 +242,27 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="dash-sources">
-            <div className="dash-source-head">
+            <div className="dash-source-head dash-source-head--ta">
               <span className="dash-source-head__src">TA Partner</span>
-              <span className="dash-source-head__col" style={{ textAlign: 'center' }}>Assigned</span>
-              <span className="dash-source-head__col" style={{ textAlign: 'center' }}>Closed</span>
-              <span className="dash-source-head__col" style={{ flex: 1.5, textAlign: 'center' }}>Progress</span>
+              <span className="dash-source-head__col">Assigned</span>
+              <span className="dash-source-head__col">Closed</span>
+              <span className="dash-source-head__col--progress">Progress</span>
             </div>
             {taPartners && taPartners.map((item, i) => {
               const progress = item.totalPositions > 0 ? Math.round((item.closedPositions / item.totalPositions) * 100) : 0;
               return (
-                <div key={i} className="dash-source-row">
+                <div key={i} className="dash-source-row dash-source-row--ta">
                   <div className="dash-source-row__src">
                     <span className="dash-source-row__emoji">👤</span>
                     <span className="dash-source-row__name">{item._id}</span>
                   </div>
-                  <span className="dash-source-row__val" style={{ color: '#818cf8', flex: 1, textAlign: 'center' }}>{item.totalPositions}</span>
-                  <span className="dash-source-row__val dash-source-row__val--hired" style={{ flex: 1, textAlign: 'center' }}>{item.closedPositions}</span>
-                  <div style={{ flex: 1.5, display: 'flex', alignItems: 'center', gap: '8px', paddingLeft: '12px' }}>
-                    <div style={{ flex: 1, height: '6px', background: 'rgba(148, 163, 184, 0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-                      <div style={{ width: `${progress}%`, height: '100%', background: 'linear-gradient(90deg, #10b981, #34d399)', borderRadius: '3px', transition: 'width 1s ease-in-out' }} />
+                  <span className="dash-source-row__val dash-source-row__val--count">{item.totalPositions}</span>
+                  <span className="dash-source-row__val dash-source-row__val--hired">{item.closedPositions}</span>
+                  <div className="dash-source-row__progress-wrap">
+                    <div className="dash-progress-bar">
+                      <div className="dash-progress-bar__fill" style={{ width: `${progress}%` }} />
                     </div>
-                    <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: '600', width: '36px', textAlign: 'right' }}>{progress}%</span>
+                    <span className="dash-progress-text">{progress}%</span>
                   </div>
                 </div>
               );

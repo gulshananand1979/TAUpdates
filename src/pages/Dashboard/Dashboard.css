@@ -221,7 +221,7 @@
 }
 
 .dash-cards-row--stats {
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 /* ===== Candidate Matrix Table ===== */
@@ -403,6 +403,61 @@
   text-align: center;
   font-size: 0.88rem;
   margin: 1rem 0;
+}
+
+/* ===== TA Partner Specific Table Styles ===== */
+.dash-source-head--ta {
+  grid-template-columns: 1fr 65px 65px 120px;
+  gap: 12px;
+}
+
+.dash-source-head__col--progress {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-align: right;
+  padding-right: 12px;
+}
+
+.dash-source-row--ta {
+  grid-template-columns: 1fr 65px 65px 120px;
+  gap: 12px;
+}
+
+.dash-source-row__val--count {
+  color: #818cf8;
+}
+
+.dash-source-row__progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 8px;
+}
+
+.dash-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(148, 163, 184, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dash-progress-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 4px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dash-progress-text {
+  font-size: 0.75rem;
+  color: var(--text-muted, #94a3b8);
+  font-weight: 700;
+  width: 38px;
+  text-align: right;
 }
 
 
