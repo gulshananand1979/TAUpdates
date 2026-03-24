@@ -47,10 +47,6 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-actions">
-          <div className="navbar-live-badge">
-            <span className="live-dot"></span>
-            <span>Live</span>
-          </div>
           <button
             className="mobile-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
