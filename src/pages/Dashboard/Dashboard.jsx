@@ -124,9 +124,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Grid: Candidate Matrix + Source Effectiveness */}
-      <div className="dash-cards-row">
-
+      {/* Grid: Candidate Matrix */}
+      <div className="dash-cards-row dash-cards-row--full">
         {/* Candidate Summary Matrix */}
         <div className="dash-card dash-card--matrix animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
           <div className="dash-card__header">
@@ -186,7 +185,10 @@ export default function Dashboard() {
             </table>
           </div>
         </div>
+      </div>
 
+      {/* Grid: Source Effectiveness + TA Partners */}
+      <div className="dash-cards-row dash-cards-row--stats">
         {/* Source Effectiveness */}
         <div className="dash-card dash-card--sources animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           <div className="dash-card__header">
@@ -228,12 +230,9 @@ export default function Dashboard() {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Bottom Row: Trend + TA Partners */}
-      <div className="dash-cards-row">
-        {/* TA Partner - Assigned/Closed */}
-        <div className="dash-card dash-card--sources animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+        {/* TA Partner vs Position */}
+        <div className="dash-card dash-card--sources animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
           <div className="dash-card__header">
             <div className="dash-card__header-left">
               <div className="dash-card__icon dash-card__icon--green">

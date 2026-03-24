@@ -216,6 +216,14 @@
   margin-bottom: 20px;
 }
 
+.dash-cards-row--full {
+  grid-template-columns: 1fr;
+}
+
+.dash-cards-row--stats {
+  grid-template-columns: 1fr 1.35fr;
+}
+
 /* ===== Candidate Matrix Table ===== */
 .dash-matrix-wrap {
   overflow-x: auto;
