@@ -1,0 +1,88 @@
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.status-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* Position statuses */
+.status-badge--active {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-400);
+}
+.status-badge--active .status-badge__dot { background: var(--accent-400); }
+
+.status-badge--paused {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning-400);
+}
+.status-badge--paused .status-badge__dot { background: var(--warning-400); }
+
+.status-badge--closed {
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--gray-400);
+}
+.status-badge--closed .status-badge__dot { background: var(--gray-400); }
+
+/* Candidate statuses */
+.status-badge--interview {
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--primary-400);
+}
+
+.status-badge--review {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning-400);
+}
+
+.status-badge--offer {
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--info-400);
+}
+
+.status-badge--accepted {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--accent-400);
+}
+
+.status-badge--shortlisted {
+  background: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
+}
+
+.status-badge--rejected {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger-400);
+}
+
+/* Priority */
+.status-badge--high {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--danger-400);
+}
+
+.status-badge--medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning-400);
+}
+
+.status-badge--low {
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--gray-400);
+}
+
+.status-badge--default {
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--gray-400);
+}
