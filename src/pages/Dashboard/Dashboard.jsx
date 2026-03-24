@@ -91,7 +91,6 @@ export default function Dashboard() {
       <div className="dash-header">
         <div className="dash-header__left">
           <h1 className="dash-header__title">Hiring Dashboard</h1>
-          <p className="dash-header__subtitle">Real-time overview of your talent acquisition pipeline</p>
         </div>
         <div className="dash-header__right">
           <select 
