@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import {
   Briefcase,
   Users,
-  TrendingUp,
   Loader2,
   BarChart2,
   ChevronUp,
@@ -50,10 +49,8 @@ export default function Dashboard() {
     );
   }
 
-  const { stats: hiringStats, trend: hiringTrend, sources: sourceSummary, taPartners } = data;
+  const { stats: hiringStats, sources: sourceSummary, taPartners } = data;
 
-  const maxApplications = hiringTrend && hiringTrend.length > 0 ? Math.max(...hiringTrend.map(d => d.applications)) : 100;
-  const safeMaxApps = maxApplications > 0 ? maxApplications : 1;
   const maxSourceCount = sourceSummary && sourceSummary.length > 0 ? Math.max(...sourceSummary.map(s => s.count)) : 1;
   const safeMaxSource = maxSourceCount > 0 ? maxSourceCount : 1;
 
@@ -235,55 +232,7 @@ export default function Dashboard() {
 
       {/* Bottom Row: Trend + TA Partners */}
       <div className="dash-cards-row">
-        {/* Hiring Trend Chart */}
-        <div className="dash-card dash-card--trend animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
-          <div className="dash-card__header">
-            <div className="dash-card__header-left">
-              <div className="dash-card__icon dash-card__icon--indigo">
-                <TrendingUp size={20} />
-              </div>
-              <h2 className="dash-card__title">Hiring Trend</h2>
-            </div>
-            <span className="dash-card__subtitle">Last 7 months</span>
-          </div>
-          <div className="chart-container">
-            <div className="bar-chart">
-              {hiringTrend && hiringTrend.map((item, i) => (
-                <div key={i} className="bar-chart__column">
-                  <div className="bar-chart__bars">
-                    <div
-                      className="bar-chart__bar bar-chart__bar--applications"
-                      style={{ height: `${(item.applications / safeMaxApps) * 100}%` }}
-                      title={`${item.applications} applications`}
-                    >
-                      <span className="bar-chart__tooltip">{item.applications}</span>
-                    </div>
-                    <div
-                      className="bar-chart__bar bar-chart__bar--hires"
-                      style={{ height: `${(item.hires / safeMaxApps) * 100}%` }}
-                      title={`${item.hires} hires`}
-                    >
-                      <span className="bar-chart__tooltip">{item.hires}</span>
-                    </div>
-                  </div>
-                  <span className="bar-chart__label">{item.month}</span>
-                </div>
-              ))}
-            </div>
-            <div className="chart-legend">
-              <span className="chart-legend__item">
-                <span className="chart-legend__dot chart-legend__dot--applications"></span>
-                Applications
-              </span>
-              <span className="chart-legend__item">
-                <span className="chart-legend__dot chart-legend__dot--hires"></span>
-                Hires
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* TA Partner vs Position */}
+        {/* TA Partner - Assigned/Closed */}
         <div className="dash-card dash-card--sources animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
           <div className="dash-card__header">
             <div className="dash-card__header-left">
