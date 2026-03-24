@@ -51,6 +51,34 @@ export default function Dashboard() {
 
   const { stats: hiringStats, sources: sourceSummary, taPartners } = data;
 
+  // Calculate Totals for Matrix
+  const matrixStages = ['R1-Technical', 'R2-Technical', 'Client Interaction', 'HR Round'];
+  const pipelineTotals = matrixStages.reduce((acc, stage) => {
+    const row = hiringStats?.candidateMatrix?.[stage] || {};
+    acc.scheduled += (row['To be Scheduled'] || 0);
+    acc.selected += (row['Selected'] || 0);
+    acc.rejected += (row['Not Selected'] || 0);
+    acc.inProgress += (row['In Progress'] || 0);
+    return acc;
+  }, { scheduled: 0, selected: 0, rejected: 0, inProgress: 0 });
+
+  // Calculate Totals for Sources
+  const sourceTotals = (sourceSummary || []).reduce((acc, s) => {
+    acc.count += (s.count || 0);
+    acc.hires += (s.hires || 0);
+    acc.rejected += (s.rejected || 0);
+    return acc;
+  }, { count: 0, hires: 0, rejected: 0 });
+  const totalConversion = sourceTotals.count > 0 ? Math.round((sourceTotals.hires / sourceTotals.count) * 100) : 0;
+
+  // Calculate Totals for TA Partners
+  const taTotals = (taPartners || []).reduce((acc, p) => {
+    acc.assigned += (p.totalPositions || 0);
+    acc.closed += (p.closedPositions || 0);
+    return acc;
+  }, { assigned: 0, closed: 0 });
+  const totalTAProgress = taTotals.assigned > 0 ? Math.round((taTotals.closed / taTotals.assigned) * 100) : 0;
+
   const maxSourceCount = sourceSummary && sourceSummary.length > 0 ? Math.max(...sourceSummary.map(s => s.count)) : 1;
   const safeMaxSource = maxSourceCount > 0 ? maxSourceCount : 1;
 
@@ -119,7 +147,7 @@ export default function Dashboard() {
           <div className="dash-pill__icon"><Users size={20} /></div>
           <div className="dash-pill__content">
             <span className="dash-pill__value">{hiringStats?.totalCandidates || 0}</span>
-            <span className="dash-pill__label">Candidates</span>
+            <span className="dash-pill__label">Total Candidates</span>
           </div>
         </div>
       </div>
@@ -182,6 +210,15 @@ export default function Dashboard() {
                   );
                 })}
               </tbody>
+              <tfoot>
+                <tr className="dash-matrix__row dash-matrix__row--total">
+                  <td className="dash-matrix__td dash-matrix__td--stage">Total</td>
+                  <td className="dash-matrix__td"><span className="dash-matrix__cell dash-matrix__cell--total">{pipelineTotals.scheduled}</span></td>
+                  <td className="dash-matrix__td"><span className="dash-matrix__cell dash-matrix__cell--total">{pipelineTotals.selected}</span></td>
+                  <td className="dash-matrix__td"><span className="dash-matrix__cell dash-matrix__cell--total">{pipelineTotals.rejected}</span></td>
+                  <td className="dash-matrix__td"><span className="dash-matrix__cell dash-matrix__cell--total">{pipelineTotals.inProgress}</span></td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>
@@ -228,6 +265,20 @@ export default function Dashboard() {
             {(!sourceSummary || sourceSummary.every(s => s.count === 0)) && (
               <p className="dash-sources__empty">No candidate data for selected period.</p>
             )}
+            {sourceSummary && sourceSummary.length > 0 && (
+              <div className="dash-source-row dash-source-row--total">
+                <div className="dash-source-row__src">
+                  <span className="dash-source-row__emoji">📊</span>
+                  <span className="dash-source-row__name">Total</span>
+                </div>
+                <span className="dash-source-row__val" style={{ color: '#fff' }}>{sourceTotals.count}</span>
+                <span className="dash-source-row__val dash-source-row__val--hired" style={{ fontWeight: 700 }}>{sourceTotals.hires}</span>
+                <span className="dash-source-row__val dash-source-row__val--rejected" style={{ fontWeight: 700 }}>{sourceTotals.rejected}</span>
+                <span className="dash-source-row__conv dash-source-row__conv--total">
+                  {totalConversion}%
+                </span>
+              </div>
+            )}
           </div>
         </div>
 
@@ -269,6 +320,22 @@ export default function Dashboard() {
             })}
             {(!taPartners || taPartners.length === 0) && (
               <p className="dash-sources__empty">No TA Partner data available.</p>
+            )}
+            {taPartners && taPartners.length > 0 && (
+              <div className="dash-source-row dash-source-row--ta dash-source-row--total">
+                <div className="dash-source-row__src">
+                  <span className="dash-source-row__emoji">👥</span>
+                  <span className="dash-source-row__name">Total</span>
+                </div>
+                <span className="dash-source-row__val dash-source-row__val--count" style={{ color: '#fff' }}>{taTotals.assigned}</span>
+                <span className="dash-source-row__val dash-source-row__val--hired" style={{ fontWeight: 700 }}>{taTotals.closed}</span>
+                <div className="dash-source-row__progress-wrap">
+                  <div className="dash-progress-bar">
+                    <div className="dash-progress-bar__fill" style={{ width: `${totalTAProgress}%`, background: 'linear-gradient(90deg, #6366f1, #818cf8)' }} />
+                  </div>
+                  <span className="dash-progress-text" style={{ color: '#fff' }}>{totalTAProgress}%</span>
+                </div>
+              </div>
             )}
           </div>
         </div>

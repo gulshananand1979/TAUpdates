@@ -460,6 +460,45 @@
   text-align: right;
 }
 
+/* ===== Total Row Styles ===== */
+.dash-matrix__row--total {
+  border-top: 2px solid rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.04);
+}
+
+.dash-matrix__row--total .dash-matrix__td {
+  font-weight: 700;
+  color: #fff;
+}
+
+.dash-matrix__cell--total {
+  color: #fff !important;
+  font-weight: 800;
+  background: rgba(148, 163, 184, 0.1) !important;
+}
+
+.dash-source-row--total {
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(148, 163, 184, 0.08);
+  padding-top: 12px;
+  margin-top: 8px;
+  font-weight: 700;
+}
+
+.dash-source-row--total .dash-source-row__name {
+  color: #fff;
+}
+
+.dash-source-row__conv--total {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 1px solid rgba(129, 140, 248, 0.3);
+}
+
 
 /* ===== Fade In Animations ===== */
 @keyframes fadeInUp {
