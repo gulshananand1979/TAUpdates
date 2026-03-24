@@ -22,10 +22,14 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/talent
 mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('✅ MongoDB connected');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
+    if (process.env.NODE_ENV !== 'production') {
+      app.listen(PORT, () => {
+        console.log(`🚀 Server running on port ${PORT}`);
+      });
+    }
   })
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err);
   });
+
+module.exports = app;

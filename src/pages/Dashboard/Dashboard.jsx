@@ -296,7 +296,6 @@ export default function Dashboard() {
               <span className="dash-source-head__src">TA Partner</span>
               <span className="dash-source-head__col">Assigned</span>
               <span className="dash-source-head__col">Closed</span>
-              <span className="dash-source-head__col--progress">Progress</span>
             </div>
             {taPartners && taPartners.map((item, i) => {
               const progress = item.totalPositions > 0 ? Math.round((item.closedPositions / item.totalPositions) * 100) : 0;
@@ -308,12 +307,6 @@ export default function Dashboard() {
                   </div>
                   <span className="dash-source-row__val dash-source-row__val--count">{item.totalPositions}</span>
                   <span className="dash-source-row__val dash-source-row__val--hired">{item.closedPositions}</span>
-                  <div className="dash-source-row__progress-wrap">
-                    <div className="dash-progress-bar">
-                      <div className="dash-progress-bar__fill" style={{ width: `${progress}%` }} />
-                    </div>
-                    <span className="dash-progress-text">{progress}%</span>
-                  </div>
                 </div>
               );
             })}
@@ -328,12 +321,6 @@ export default function Dashboard() {
                 </div>
                 <span className="dash-source-row__val dash-source-row__val--count" style={{ color: '#fff' }}>{taTotals.assigned}</span>
                 <span className="dash-source-row__val dash-source-row__val--hired" style={{ fontWeight: 700 }}>{taTotals.closed}</span>
-                <div className="dash-source-row__progress-wrap">
-                  <div className="dash-progress-bar">
-                    <div className="dash-progress-bar__fill" style={{ width: `${totalTAProgress}%`, background: 'linear-gradient(90deg, #6366f1, #818cf8)' }} />
-                  </div>
-                  <span className="dash-progress-text" style={{ color: '#fff' }}>{totalTAProgress}%</span>
-                </div>
               </div>
             )}
           </div>

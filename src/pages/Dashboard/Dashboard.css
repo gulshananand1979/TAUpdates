@@ -407,7 +407,7 @@
 
 /* ===== TA Partner Specific Table Styles ===== */
 .dash-source-head--ta {
-  grid-template-columns: 1fr 65px 65px 120px;
+  grid-template-columns: 1fr 100px 100px;
   gap: 12px;
 }
 
@@ -422,7 +422,7 @@
 }
 
 .dash-source-row--ta {
-  grid-template-columns: 1fr 65px 65px 120px;
+  grid-template-columns: 1fr 100px 100px;
   gap: 12px;
 }
 
