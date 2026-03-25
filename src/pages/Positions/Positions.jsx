@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Search, MapPin, Clock, Users as UsersIcon, ChevronDown, Loader2, Plus, UserPlus, Briefcase } from 'lucide-react';
+import { Search, MapPin, Clock, Users as UsersIcon, ChevronDown, Loader2, Plus, UserPlus, Briefcase, Trash2 } from 'lucide-react';
 import StatusBadge from '../../components/StatusBadge/StatusBadge';
 import Modal from '../../components/Modal/Modal';
-import { fetchPositions, fetchCandidates, createPosition, createCandidate, updatePosition } from '../../services/api';
+import { fetchPositions, fetchCandidates, createPosition, createCandidate, updatePosition, deletePosition } from '../../services/api';
 import './Positions.css';
 
 export default function Positions() {
@@ -89,6 +89,19 @@ export default function Positions() {
       alert('Failed to update position. Check console.');
     } finally {
       setIsUpdating(false);
+    }
+  };
+
+  const handleDeletePosition = async (id, e) => {
+    e.stopPropagation();
+    if (!window.confirm('Are you sure you want to delete this position?')) return;
+    
+    try {
+      await deletePosition(id);
+      await loadPositions();
+    } catch (error) {
+      console.error('Failed to delete position', error);
+      alert('Failed to delete position. Check console.');
     }
   };
 
@@ -223,6 +236,9 @@ export default function Positions() {
                     </button>
                     <button className="pos-action-btn" onClick={(e) => handleEditClick(pos, e)}>
                       Edit
+                    </button>
+                    <button className="pos-action-btn pos-action-btn--delete" onClick={(e) => handleDeletePosition(pos._id || pos.id, e)}>
+                      <Trash2 size={16} /> Delete
                     </button>
                   </div>
                 </div>

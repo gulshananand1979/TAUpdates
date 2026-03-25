@@ -307,6 +307,16 @@
   border-color: rgba(99, 102, 241, 0.5);
 }
 
+.pos-action-btn--delete {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.2);
+}
+.pos-action-btn--delete:hover {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.4);
+  color: #fca5a5;
+}
+
 /* States & Modals */
 .pos-empty {
   text-align: center;

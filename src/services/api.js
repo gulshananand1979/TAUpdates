@@ -21,6 +21,11 @@ export const updatePosition = async (id, positionData) => {
   return data;
 };
 
+export const deletePosition = async (id) => {
+  const { data } = await api.delete(`/positions/${id}`);
+  return data;
+};
+
 export const fetchCandidates = async () => {
   const { data } = await api.get('/candidates');
   return data;
