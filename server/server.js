@@ -17,19 +17,27 @@ app.use('/api/analytics', require('./routes/analytics'));
 
 // Database Connection
 const PORT = process.env.PORT || 5001;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/talenthub';
+const MONGODB_URI = process.env.MONGODB_URI || (process.env.NODE_ENV === 'production' ? null : 'mongodb://localhost:27017/talenthub');
 
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('✅ MongoDB connected');
-    if (process.env.NODE_ENV !== 'production') {
-      app.listen(PORT, () => {
-        console.log(`🚀 Server running on port ${PORT}`);
-      });
-    }
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection error:', err);
-  });
+if (!MONGODB_URI && process.env.NODE_ENV === 'production') {
+  console.error('❌ CRITICAL: MONGODB_URI is not defined in environment variables!');
+}
+
+if (MONGODB_URI) {
+  mongoose.connect(MONGODB_URI)
+    .then(() => {
+      console.log('✅ MongoDB connected');
+      if (process.env.NODE_ENV !== 'production') {
+        app.listen(PORT, () => {
+          console.log(`🚀 Server running on port ${PORT}`);
+        });
+      }
+    })
+    .catch((err) => {
+      console.error('❌ MongoDB connection error:', err);
+    });
+} else {
+  console.warn('⚠️ Server started without MongoDB connection (Development fallback or Missing URI)');
+}
 
 module.exports = app;
